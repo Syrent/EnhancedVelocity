@@ -1,0 +1,16 @@
+general:
+  raw_prefix: "[VelocityReport]"
+  prefix: "<gradient:dark_red:red>VelocityReport</gradient> <gold>|</gold>"
+  console_prefix: "<gray>[<gradient:dark_red:red>VelocityReport</gradient>]</gray>"
+  successful_prefix: "<dark_gray>[</dark_gray><dark_green><bold>✔</bold><dark_gray>]</dark_gray>"
+  warn_prefix: "<dark_gray>[</dark_gray><gold><bold>!</bold><dark_gray>]</dark_gray>"
+  error_prefix: "<dark_gray>[</dark_gray><dark_red><bold>✘</bold><dark_gray>]</dark_gray>"
+  only_players: "$error_prefix <gradient:dark_red:red>Only players can use this command."
+  valid_parameters: "$error_prefix <gradient:dark_red:red>Please use a valid parameter for this command. <dark_gray>($argument)"
+command:
+  no_permission: "$error_prefix <gradient:dark_red:red>You don't have permission to use this command! <dark_gray>($permission)"
+features:
+  global_list:
+    header: "<bold><gradient:gold:yellow><st>                </st></gradient></bold> <gradient:blue:aqua>Network Global List</gradient> <dark_gray>(<gray>$count</gray>)</dark_gray> <bold><gradient:yellow:gold><st>                </st></gradient></bold>"
+    no_one_playing: " No one is playing on this server!"
+    server: "<reset><hover:show_text:'<aqua>▣ Players:<gray>$players</gray>'><gray>[<gradient:dark_red:red:gold:yellow:green>$progress</gradient><gray>] <dark_gray>(<gray>$count</gray>)</dark_gray> <white>« <aqua>$server"

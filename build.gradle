@@ -1,0 +1,159 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'org.jetbrains.kotlin.jvm' version '1.7.20'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+    id 'org.jetbrains.gradle.plugin.idea-ext' version '1.0.1'
+}
+
+group = 'ir.syrent.enhancedvelocity'
+version = findProperty("version")
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+
+    // Velocity-API
+    maven {
+        name 'papermc'
+        url 'https://repo.papermc.io/repository/maven-public/'
+    }
+
+    // VRuom
+    maven {
+        url = uri("https://maven.pkg.github.com/mohamad82bz/ruom")
+        credentials {
+            username = project.findProperty("gpr.user")
+            password = project.findProperty("gpr.key")
+        }
+    }
+
+    maven {
+        name = "sonatype-oss-snapshots1"
+        url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+    }
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'me.mohamad82' && details.requested.name == 'velocity-ruom') {
+            details.useVersion '4.2.14'
+            details.because 'fixes critical bug in 4.1.0'
+        }
+    }
+}
+
+kotlin {
+    sourceSets {
+        dependencies {
+            compileOnly files("lib/VelocityVanish-3.0.0.jar")
+        }
+    }
+}
+
+dependencies {
+    compileOnly 'com.velocitypowered:velocity-api:3.1.1'
+
+    compileOnly files("lib/VelocityVanish-3.0.1.jar")
+
+    implementation 'org.bstats:bstats-velocity:3.0.0'
+    implementation 'me.mohamad82:ruom-velocity:4.2.14'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    implementation 'net.kyori:adventure-text-minimessage:4.11.0'
+    implementation 'org.spongepowered:configurate-yaml:4.1.2'
+
+    annotationProcessor 'com.velocitypowered:velocity-api:3.1.1'
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+shadowJar {
+    minimize()
+
+    relocate('me.mohamad82.ruom', 'ir.syrent.enhancedvelocity.ruom')
+    relocate('org.bstats', 'ir.syrent.enhancedvelocity.bstats')
+    relocate('org.spongepowered', 'ir.syrent.spongepowered')
+
+    // @see https://youtrack.jetbrains.com/issue/KT-25709
+    exclude '**/*.kotlin_metadata'
+    exclude '**/*.kotlin_module'
+    exclude '**/*.kotlin_builtins'
+
+    archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
+}
+
+jar {
+    archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + " " + "unshaded" + ".jar"
+}
+
+def targetJavaVersion = 17
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.deprecation = true
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+    kotlinOptions {
+        jvmTarget = "8"
+        freeCompilerArgs += ["-Xjvm-default=all"]
+    }
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileJava.dependsOn clean
+
+build.dependsOn shadowJar
+
+tasks.withType(Jar) {
+    destinationDirectory = file("$rootDir/bin/")
+}
+
+clean.doLast {
+    file("${rootDir}/bin").deleteDir()
+}
+
+def templateSource = file('src/main/templates')
+def templateDest = layout.buildDirectory.dir('generated/sources/templates')
+def generateTemplates = tasks.register('generateTemplates', Copy) { task ->
+    def props = [
+            'version': project.version
+    ]
+    task.inputs.properties props
+
+    task.from templateSource
+    task.into templateDest
+    task.expand props
+}
+sourceSets.main.java.srcDir(generateTemplates.map { it.outputs })
+rootProject.idea.project.settings.taskTriggers.afterSync generateTemplates
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}

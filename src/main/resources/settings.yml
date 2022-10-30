@@ -1,0 +1,16 @@
+default_language: "en_US"
+features:
+  global_list:
+    command: globallist
+    aliases:
+      - glist
+      - list
+      - players
+    progress:
+      count: 45
+      complete: "|"
+      not_complete: "<gray>|"
+    vanish:
+      decoration:
+        server: "<yellow>$server</yellow>"
+        player: "<red>$player</red>"

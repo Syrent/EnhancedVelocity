@@ -11,6 +11,10 @@ import java.util.concurrent.CompletableFuture
 
 class FindCommand : SimpleCommand {
 
+    init {
+        VRuom.registerCommand(Settings.findCommand, Settings.findAliases, this)
+    }
+
     override fun execute(invocation: SimpleCommand.Invocation) {
         val sender = invocation.source()
         val args = invocation.arguments()

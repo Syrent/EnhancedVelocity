@@ -23,6 +23,9 @@ object Settings {
     lateinit var playerVanishDecoration: String
     lateinit var serverVanishDecoration: String
 
+    lateinit var findCommand: String
+    lateinit var findAliases: List<String>
+
     init {
         load()
     }
@@ -62,6 +65,10 @@ object Settings {
                 this[server.key.toString()] = serverData
             }
         }
+
+        val find = features.node("global_list")
+        findCommand = find.node("command").string ?: "glist"
+        findAliases = find.node("aliases").getList(String::class.java) ?: emptyList()
 
         val languageYaml = YamlConfig("languages/${defaultLanguage}")
         languageYaml.create()

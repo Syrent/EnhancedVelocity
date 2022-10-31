@@ -1,6 +1,7 @@
 package ir.syrent.enhancedvelocity.storage
 
 import ir.syrent.enhancedvelocity.EnhancedVelocity
+import ir.syrent.enhancedvelocity.core.ServerData
 import ir.syrent.enhancedvelocity.utils.TextReplacement
 import me.mohamad82.ruom.utils.ResourceUtils
 import org.spongepowered.configurate.CommentedConfigurationNode
@@ -10,6 +11,8 @@ import java.io.File
 object Settings {
 
     private val messages = mutableMapOf<Message, String>()
+
+    val servers = mutableMapOf<String, ServerData>()
 
     lateinit var defaultLanguage: String
     lateinit var globalListCommand: String
@@ -46,6 +49,19 @@ object Settings {
         val decoration = vanish.node("decoration")
         playerVanishDecoration = decoration.node("player").string!!
         serverVanishDecoration = decoration.node("server").string!!
+
+        servers.apply {
+            this.clear()
+            val serverSection = globalList.node("server")
+            for (server in serverSection.childrenMap()) {
+                val serverData = ServerData(
+                    server.value.node("displayname").string,
+                    server.value.node("sum").getList(String::class.java)?.toList(),
+                    server.value.node("hidden").boolean,
+                )
+                this[server.key.toString()] = serverData
+            }
+        }
 
         val languageYaml = YamlConfig("languages/${defaultLanguage}")
         languageYaml.create()

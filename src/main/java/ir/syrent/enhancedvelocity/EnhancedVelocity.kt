@@ -12,7 +12,6 @@ import me.mohamad82.ruom.VRuom
 import org.bstats.velocity.Metrics
 import org.slf4j.Logger
 import java.nio.file.Path
-import java.util.concurrent.TimeUnit
 
 class EnhancedVelocity @Inject constructor(
     server: ProxyServer,

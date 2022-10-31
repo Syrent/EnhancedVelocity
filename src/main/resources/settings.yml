@@ -10,6 +10,18 @@ features:
       count: 45
       complete: "|"
       not_complete: "<gray>|"
+    server:
+      BedWarsMain:
+        sum:
+          - "bw-server-1"
+          - "bw-server-2"
+          - "bw-server-3"
+      bw-server-1:
+        hidden: true
+      bw-server-2:
+        hidden: true
+      bw-server-3:
+        hidden: true
     vanish:
       decoration:
         server: "<yellow>$server</yellow>"

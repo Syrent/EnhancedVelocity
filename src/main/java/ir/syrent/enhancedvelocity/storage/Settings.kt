@@ -66,7 +66,7 @@ object Settings {
             }
         }
 
-        val find = features.node("global_list")
+        val find = features.node("find")
         findCommand = find.node("command").string ?: "find"
         findAliases = find.node("aliases").getList(String::class.java) ?: emptyList()
 

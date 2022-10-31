@@ -38,15 +38,6 @@ repositories {
     }
 }
 
-configurations.all {
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        if (details.requested.group == 'me.mohamad82' && details.requested.name == 'velocity-ruom') {
-            details.useVersion '4.2.14'
-            details.because 'fixes critical bug in 4.1.0'
-        }
-    }
-}
-
 kotlin {
     sourceSets {
         dependencies {

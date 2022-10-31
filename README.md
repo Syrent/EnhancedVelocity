@@ -12,9 +12,9 @@ The precompiled JAR can be downloaded for free from:
 
 * GitHub releases: https://github.com/Syrent/EnhancedVelocity/releases
 * Modrinth (Recommended): https://modrinth.com/plugin/enhancedvelocity
-* Spigot: https://www.spigotmc.org/resources/x
-* Polymart: https://polymart.org/resource/x
-* Paper's forum: https://forums.papermc.io/threads/x
+* Spigot: https://www.spigotmc.org/resources/enhancedvelocity-velocity-only.106014/
+* Polymart: https://polymart.org/resource/enhancedvelocity.3070
+* Paper's forum: https://forums.papermc.io/threads/enhancedvelocity.556/
 
 Other links:
 

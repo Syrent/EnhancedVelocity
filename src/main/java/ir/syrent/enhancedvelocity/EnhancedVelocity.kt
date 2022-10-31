@@ -35,7 +35,17 @@ class EnhancedVelocity @Inject constructor(
         instance = this
 
         enableMetrics()
+        registerDependencies()
+        initializeInstances()
+        registerCommands()
+    }
+
+    private fun initializeInstances() {
         Settings
+    }
+
+    private fun registerDependencies() {
+
         VRuom.log("Checking for VelocityVanish...")
         try {
             Class.forName("ir.syrent.velocityvanish.velocity.VelocityVanish")
@@ -44,7 +54,6 @@ class EnhancedVelocity @Inject constructor(
         } catch (_: ClassNotFoundException) {
             VRuom.log("VelocityVanish not found. disabling hook...")
         }
-        registerCommands()
     }
 
     private fun enableMetrics() {

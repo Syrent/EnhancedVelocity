@@ -13,5 +13,10 @@ enum class Message(val path: String) {
     GLOBALLIST_HEADER("features.global_list.header"),
     NO_ONE_PLAYING("features.global_list.no_one_playing"),
     GLOBALLIST_SERVER("features.global_list.server"),
+    FIND_USAGE("features.find.command.usage"),
+    FIND_USE("features.find.command.use"),
+    FIND_VANISHED("features.find.command.vanished"),
+    FIND_NO_SERVER("features.find.command.no_target"),
+    FIND_NO_TARGET("features.find.command.no_target"),
     EMPTY("");
 }

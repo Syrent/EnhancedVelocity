@@ -14,3 +14,10 @@ features:
     header: "<bold><gradient:gold:yellow><st>                </st></gradient></bold> <gradient:blue:aqua>Network Global List</gradient> <dark_gray>(<gray>$count</gray>)</dark_gray> <bold><gradient:yellow:gold><st>                </st></gradient></bold>"
     no_one_playing: " No one is playing on this server!"
     server: "<reset><hover:show_text:'<aqua>▣ Players:<gray>$players</gray>'><gray>[<gradient:green:yellow:gold:red:dark_red>$progress</gradient><gray>] <dark_gray>(<gray>$count</gray>)</dark_gray> <white>« <aqua>$server"
+  find:
+    command:
+      usage: "$warn_prefix <gradient:dark_red:red>Usage: <gold>/find <yellow><user>"
+      use: "$successful_prefix <gradient:dark_green:green>$player is playing on $server server.$vanished"
+      vanished: " <dark_gray>(Vanished)</dark_gray>"
+      no_target: "$error_prefix <gradient:dark_red:red>Player not found!"
+      no_server: "$warn_prefix <gradient:red:gold>Can't get $player server. Please try again later."

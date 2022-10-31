@@ -67,7 +67,7 @@ object Settings {
         }
 
         val find = features.node("global_list")
-        findCommand = find.node("command").string ?: "glist"
+        findCommand = find.node("command").string ?: "find"
         findAliases = find.node("aliases").getList(String::class.java) ?: emptyList()
 
         val languageYaml = YamlConfig("languages/${defaultLanguage}")

@@ -17,7 +17,7 @@ features:
   find:
     command:
       usage: "$warn_prefix <gradient:dark_red:red>Usage: <gold>/find <yellow><user>"
-      use: "$successful_prefix <gradient:dark_green:green>$player is playing on $server server.$vanished"
+      use: "$successful_prefix <gradient:dark_green:green><gold>$player</gold> is playing on <gold>$server</gold> server.$vanished"
       vanished: " <dark_gray>(Vanished)</dark_gray>"
       no_target: "$error_prefix <gradient:dark_red:red>Player not found!"
-      no_server: "$warn_prefix <gradient:red:gold>Can't get $player server. Please try again later."
+      no_server: "$warn_prefix <gradient:red:gold>Can't get <aqua>$player</aqua> server. Please try again later."

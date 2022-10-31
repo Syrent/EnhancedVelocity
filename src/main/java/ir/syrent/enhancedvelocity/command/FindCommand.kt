@@ -36,7 +36,6 @@ class FindCommand : SimpleCommand {
             return
         }
 
-
         val vanished = VelocityVanishHook.isVanished(targetPlayer)
         val server = targetPlayer.currentServer
 
@@ -45,26 +44,32 @@ class FindCommand : SimpleCommand {
             return
         }
 
+        if (vanished && !sender.hasPermission(Permissions.Actions.FIND_VANISHED)) {
+            sender.sendMessage(Message.FIND_NO_TARGET)
+            return
+        }
+
         sender.sendMessage(
             Message.FIND_USE,
             TextReplacement("player", targetPlayer.username),
             TextReplacement("server", if (server.isPresent) server.get().serverInfo.name else "Unknown"),
-            TextReplacement("vanished", if (vanished) Settings.formatMessage(Message.FIND_VANISHED) else "")
+            TextReplacement("vanished", if (vanished && sender.hasPermission(Permissions.Actions.FIND_VANISHED)) Settings.formatMessage(Message.FIND_VANISHED) else "")
         )
     }
 
-    override fun suggest(invocation: SimpleCommand.Invocation): MutableList<String> {
-        if (invocation.arguments().isNotEmpty()) {
-            return VelocityVanishHook.getNonVanishedPlayers().map { it.username }.toMutableList()
-        }
-        return mutableListOf()
+    override fun suggest(invocation: SimpleCommand.Invocation): List<String> {
+        val list = VelocityVanishHook.getNonVanishedPlayers().map { it.username }
+
+        return if (list.isNotEmpty()) list.filter { it.lowercase().startsWith(invocation.arguments().last().lowercase()) }.sorted() else list
     }
 
-    override fun suggestAsync(invocation: SimpleCommand.Invocation): CompletableFuture<MutableList<String>> {
-        val future = CompletableFuture<MutableList<String>>()
-        if (invocation.arguments().isNotEmpty()) {
-            future.complete(VelocityVanishHook.getNonVanishedPlayers().map { it.username }.toMutableList())
-        }
+    override fun suggestAsync(invocation: SimpleCommand.Invocation): CompletableFuture<List<String>> {
+        val future = CompletableFuture<List<String>>()
+        val list = mutableListOf<String>()
+        val args = invocation.arguments()
+
+        list.addAll(VelocityVanishHook.getNonVanishedPlayers().map { it.username })
+        future.complete(if (args.isNotEmpty()) list.filter { it.lowercase().startsWith(args.last().lowercase()) }.sorted() else list)
         return future
     }
 }

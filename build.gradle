@@ -41,7 +41,7 @@ repositories {
 kotlin {
     sourceSets {
         dependencies {
-            compileOnly files("lib/VelocityVanish-3.0.0.jar")
+            compileOnly files("lib/VelocityVanish-3.18.0.jar")
         }
     }
 }

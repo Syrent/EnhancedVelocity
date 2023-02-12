@@ -7,6 +7,7 @@ import com.velocitypowered.api.plugin.annotation.DataDirectory
 import com.velocitypowered.api.proxy.ProxyServer
 import ir.syrent.enhancedvelocity.command.FindCommand
 import ir.syrent.enhancedvelocity.command.GListCommand
+import ir.syrent.enhancedvelocity.command.SendCommand
 import ir.syrent.enhancedvelocity.storage.Settings
 import me.mohamad82.ruom.VRUoMPlugin
 import me.mohamad82.ruom.VRuom
@@ -65,6 +66,7 @@ class EnhancedVelocity @Inject constructor(
     private fun registerCommands() {
         GListCommand()
         FindCommand()
+        SendCommand()
     }
 
     companion object {

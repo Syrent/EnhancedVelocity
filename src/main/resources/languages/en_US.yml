@@ -6,6 +6,8 @@ general:
   warn_prefix: "<dark_gray>[</dark_gray><gold><bold>!</bold><dark_gray>]</dark_gray>"
   error_prefix: "<dark_gray>[</dark_gray><dark_red><bold>✘</bold><dark_gray>]</dark_gray>"
   only_players: "$error_prefix <gradient:dark_red:red>Only players can use this command."
+  player_not_found: "$error_prefix <gradient:dark_red:red>Player not found!"
+  server_not_found: "$error_prefix <gradient:dark_red:red>Server not found!"
   valid_parameters: "$error_prefix <gradient:dark_red:red>Please use a valid parameter for this command. <dark_gray>($argument)"
 command:
   no_permission: "$error_prefix <gradient:dark_red:red>You don't have permission to use this command! <dark_gray>($permission)"
@@ -21,3 +23,11 @@ features:
       vanished: " <dark_gray>(Vanished)</dark_gray>"
       no_target: "$error_prefix <gradient:dark_red:red>Player not found!"
       no_server: "$warn_prefix <gradient:red:gold>Can't get <aqua>$player</aqua> server. Please try again later."
+  send:
+    command:
+      usage: "$warn_prefix <gradient:dark_red:red>Usage: <gold>/send <yellow><user> <green><server>"
+      use: "$successful_prefix <gradient:dark_green:green><gold>$player</gold> has been sent to <gold>$server</gold> server."
+  alert:
+    command:
+      usage: "$warn_prefix <gradient:dark_red:red>Usage: <gold>/alert <yellow><message>"
+      use: "$successful_prefix <gradient:dark_green:green>$message"

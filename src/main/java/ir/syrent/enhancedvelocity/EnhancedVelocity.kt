@@ -5,6 +5,7 @@ import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent
 import com.velocitypowered.api.plugin.annotation.DataDirectory
 import com.velocitypowered.api.proxy.ProxyServer
+import ir.syrent.enhancedvelocity.command.AlertCommand
 import ir.syrent.enhancedvelocity.command.FindCommand
 import ir.syrent.enhancedvelocity.command.GListCommand
 import ir.syrent.enhancedvelocity.command.SendCommand
@@ -67,6 +68,7 @@ class EnhancedVelocity @Inject constructor(
         GListCommand()
         FindCommand()
         SendCommand()
+        AlertCommand()
     }
 
     companion object {

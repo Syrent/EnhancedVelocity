@@ -31,3 +31,13 @@ features:
     command:
       usage: "$warn_prefix <gradient:dark_red:red>Usage: <gold>/alert <yellow><message>"
       use: "$successful_prefix <gradient:dark_green:green>$message"
+  ping:
+    command:
+      use: "$successful_prefix <gradient:dark_green:green>Your ping is <green>$ping</green>"
+      no_target: "$error_prefix <gradient:dark_red:red>Player not found!"
+      use_target: "$successful_prefix <gradient:dark_green:green><gold>$player</gold> ping is <green>$ping</green>"
+  kickall:
+    command:
+      use: "$successful_prefix <gradient:dark_green:green>Kicked all users from <yellow>$server</yellow>!"
+      usage: "$warn_prefix <gradient:dark_red:red>Usage: <gold>/kickall <yellow><server>"
+      no_server: "$error_prefix <gradient:dark_red:red>Server not found!"

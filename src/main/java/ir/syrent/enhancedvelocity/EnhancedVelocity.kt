@@ -5,10 +5,7 @@ import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent
 import com.velocitypowered.api.plugin.annotation.DataDirectory
 import com.velocitypowered.api.proxy.ProxyServer
-import ir.syrent.enhancedvelocity.command.AlertCommand
-import ir.syrent.enhancedvelocity.command.FindCommand
-import ir.syrent.enhancedvelocity.command.GListCommand
-import ir.syrent.enhancedvelocity.command.SendCommand
+import ir.syrent.enhancedvelocity.command.*
 import ir.syrent.enhancedvelocity.storage.Settings
 import me.mohamad82.ruom.VRUoMPlugin
 import me.mohamad82.ruom.VRuom
@@ -69,6 +66,8 @@ class EnhancedVelocity @Inject constructor(
         FindCommand()
         SendCommand()
         AlertCommand()
+        PingCommand()
+        KickAllCommand()
     }
 
     companion object {

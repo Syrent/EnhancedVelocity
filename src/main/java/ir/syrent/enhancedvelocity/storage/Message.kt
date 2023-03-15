@@ -24,5 +24,11 @@ enum class Message(val path: String) {
     FIND_VANISHED("features.find.command.vanished"),
     FIND_NO_SERVER("features.find.command.no_target"),
     FIND_NO_TARGET("features.find.command.no_target"),
+    PING_USE("features.ping.command.use"),
+    PING_NO_TARGET("features.ping.command.no_target"),
+    PING_USE_TARGET("features.ping.command.use_target"),
+    KICKALL_USAGE("features.kickall.command.usage"),
+    KICKALL_USE("features.kickall.command.use"),
+    KICKALL_NO_SERVER("features.kickall.command.no_server"),
     EMPTY("");
 }

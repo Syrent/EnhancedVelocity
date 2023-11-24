@@ -77,7 +77,7 @@ class GListCommand : SimpleCommand {
             counter++
 
             val server = orderedServer.key
-            val serverName = server.serverInfo.name
+            val serverName = Settings.servers.getOrElse(server.serverInfo.name) { null }?.displayname ?: server.serverInfo.name
             val allServerPlayers = orderedServer.value
 
             val progress = ProgressBar.progressBar(allServerPlayers.size, let { if (canSeeVanishedPlayers) VRuom.getServer().playerCount else VRuom.getServer().allPlayers.filter { !isVanished(it) }.size }, Settings.progressCount, Settings.progressComplete, Settings.progressNotComplete)

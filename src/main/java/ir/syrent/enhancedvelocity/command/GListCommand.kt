@@ -103,7 +103,7 @@ class GListCommand : SimpleCommand {
     }
 
     private fun formatPlayerList(players: Collection<Player>): String {
-        return "\n" + players.joinToString(", ") {
+        return "\n" + players.distinctBy { player -> player.username }.joinToString(", ") {
             player ->
                 if (isVanished(player))
                     Settings.formatMessage(Settings.playerVanishDecoration.replace("\$player", player.username))

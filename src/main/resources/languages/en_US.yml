@@ -1,7 +1,7 @@
 general:
-  raw_prefix: "[VelocityReport]"
-  prefix: "<gradient:dark_red:red>VelocityReport</gradient> <gold>|</gold>"
-  console_prefix: "<gray>[<gradient:dark_red:red>VelocityReport</gradient>]</gray>"
+  raw_prefix: "[EnhancedVelocity]"
+  prefix: "<gradient:dark_red:red>EnhancedVelocity</gradient> <gold>|</gold>"
+  console_prefix: "<gray>[<gradient:dark_red:red>EnhancedVelocity</gradient>]</gray>"
   successful_prefix: "<dark_gray>[</dark_gray><dark_green><bold>✔</bold><dark_gray>]</dark_gray>"
   warn_prefix: "<dark_gray>[</dark_gray><gold><bold>!</bold><dark_gray>]</dark_gray>"
   error_prefix: "<dark_gray>[</dark_gray><dark_red><bold>✘</bold><dark_gray>]</dark_gray>"

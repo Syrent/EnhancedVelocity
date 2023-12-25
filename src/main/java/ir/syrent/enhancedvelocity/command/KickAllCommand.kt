@@ -23,19 +23,22 @@ class KickAllCommand : SimpleCommand {
         }
 
         if (args.isEmpty()) {
-            sender.sendMessage(Message.KICKALL_USAGE)
+            for (server in VRuom.getServer().allServers) {
+                server.playersConnected.filter { !it.hasPermission(Permissions.Actions.KICKALL_BYPASS) }.forEach { it.createConnectionRequest(server).fireAndForget() }
+            }
+            sender.sendMessage(Message.KICKALL_USE_GLOBAL)
             return
         }
-
-        val target = VRuom.getServer().allServers.find { it.serverInfo.name.lowercase() == args[0] }
 
         if (target == null) {
             sender.sendMessage(Message.KICKALL_NO_SERVER)
             return
         }
 
+        val target = VRuom.getServer().allServers.find { it.serverInfo.name.lowercase() == args[0].lowercase() }
+
         target.playersConnected.filter { !it.hasPermission(Permissions.Actions.KICKALL_BYPASS) }.forEach { it.createConnectionRequest(VRuom.getServer().allServers.first()).fireAndForget() }
-        sender.sendMessage(Message.KICKALL_USE, TextReplacement("server", target.serverInfo.name))
+        sender.sendMessage(Message.KICKALL_USE_SERVER, TextReplacement("server", target.serverInfo.name))
         return
     }
     

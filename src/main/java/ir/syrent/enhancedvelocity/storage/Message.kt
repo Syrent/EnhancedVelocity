@@ -28,7 +28,8 @@ enum class Message(val path: String) {
     PING_NO_TARGET("features.ping.command.no_target"),
     PING_USE_TARGET("features.ping.command.use_target"),
     KICKALL_USAGE("features.kickall.command.usage"),
-    KICKALL_USE("features.kickall.command.use"),
+    KICKALL_USE_SERVER("features.kickall.command.use_server"),
+    KICKALL_USE_GLOBAL("features.kickall.command.use_global"),
     KICKALL_NO_SERVER("features.kickall.command.no_server"),
     EMPTY("");
 }

@@ -1,17 +1,10 @@
 package ir.syrent.enhancedvelocity.command
 
 import com.velocitypowered.api.command.SimpleCommand
-import com.velocitypowered.api.proxy.Player
-import com.velocitypowered.api.proxy.server.RegisteredServer
-import ir.syrent.enhancedvelocity.hook.VelocityVanishHook
-import ir.syrent.enhancedvelocity.hook.VelocityVanishHook.getNonVanishedPlayers
-import ir.syrent.enhancedvelocity.hook.VelocityVanishHook.isVanished
 import ir.syrent.enhancedvelocity.storage.Message
-import ir.syrent.enhancedvelocity.storage.Settings
 import ir.syrent.enhancedvelocity.utils.TextReplacement
 import ir.syrent.enhancedvelocity.utils.sendMessage
-import me.mohamad82.ruom.VRuom
-import me.mohamad82.ruom.string.ProgressBar
+import ir.syrent.enhancedvelocity.vruom.VRuom
 
 class AlertCommand : SimpleCommand {
 

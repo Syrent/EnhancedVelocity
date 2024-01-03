@@ -3,7 +3,8 @@ package ir.syrent.enhancedvelocity.storage
 import ir.syrent.enhancedvelocity.EnhancedVelocity
 import ir.syrent.enhancedvelocity.core.ServerData
 import ir.syrent.enhancedvelocity.utils.TextReplacement
-import me.mohamad82.ruom.utils.ResourceUtils
+import ir.syrent.enhancedvelocity.vruom.VRuom
+import ir.syrent.enhancedvelocity.vruom.string.ResourceUtils
 import org.spongepowered.configurate.CommentedConfigurationNode
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader
 import java.io.File
@@ -126,12 +127,12 @@ object Settings {
         return messages[message] ?: "Unknown message ($message)"
     }
 
-    class YamlConfig constructor(private val name: String) {
+    class YamlConfig(private val name: String) {
         private var loader: YamlConfigurationLoader? = null
         var root: CommentedConfigurationNode? = null
 
         fun create() {
-            val dataDirectory = EnhancedVelocity.instance.dataDirectory.toFile()
+            val dataDirectory = VRuom.getDataDirectory().toFile()
             dataDirectory.mkdir()
 
             val copyFile = File(dataDirectory, "$name.yml")

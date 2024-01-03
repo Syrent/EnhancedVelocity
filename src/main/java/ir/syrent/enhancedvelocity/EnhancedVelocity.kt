@@ -7,8 +7,8 @@ import com.velocitypowered.api.plugin.annotation.DataDirectory
 import com.velocitypowered.api.proxy.ProxyServer
 import ir.syrent.enhancedvelocity.command.*
 import ir.syrent.enhancedvelocity.storage.Settings
-import me.mohamad82.ruom.VRUoMPlugin
-import me.mohamad82.ruom.VRuom
+import ir.syrent.enhancedvelocity.vruom.VRUoMPlugin
+import ir.syrent.enhancedvelocity.vruom.VRuom
 import org.bstats.velocity.Metrics
 import org.slf4j.Logger
 import java.nio.file.Path
@@ -18,16 +18,14 @@ class EnhancedVelocity @Inject constructor(
     logger: Logger,
     metricsFactory: Metrics.Factory,
     @DataDirectory dataDirectory: Path
-) : VRUoMPlugin(server, logger) {
+) : VRUoMPlugin(server, logger, dataDirectory) {
 
     private val metricsFactory: Metrics.Factory
-    val dataDirectory: Path
     var velocityVanishHook = false
         private set
 
     init {
         this.metricsFactory = metricsFactory
-        this.dataDirectory = dataDirectory
     }
 
     @Subscribe

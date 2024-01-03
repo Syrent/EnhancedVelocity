@@ -23,15 +23,6 @@ repositories {
         url 'https://repo.papermc.io/repository/maven-public/'
     }
 
-    // VRuom
-    maven {
-        url = uri("https://maven.pkg.github.com/mohamad82bz/ruom")
-        credentials {
-            username = project.findProperty("gpr.user")
-            password = project.findProperty("gpr.key")
-        }
-    }
-
     maven {
         name = "sonatype-oss-snapshots1"
         url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
@@ -52,10 +43,10 @@ dependencies {
     compileOnly files("lib/VelocityVanish-3.0.1.jar")
 
     implementation 'org.bstats:bstats-velocity:3.0.0'
-    implementation 'me.mohamad82:ruom-velocity:4.2.14'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation 'net.kyori:adventure-text-minimessage:4.11.0'
     implementation 'org.spongepowered:configurate-yaml:4.1.2'
+    implementation 'commons-io:commons-io:2.6'
 
     annotationProcessor 'com.velocitypowered:velocity-api:3.1.1'
 }

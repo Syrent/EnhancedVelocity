@@ -8,7 +8,7 @@ import ir.syrent.enhancedvelocity.hook.VelocityVanishHook.getVanishedPlayerNames
 import ir.syrent.enhancedvelocity.storage.Message
 import ir.syrent.enhancedvelocity.utils.TextReplacement
 import ir.syrent.enhancedvelocity.utils.sendMessage
-import me.mohamad82.ruom.VRuom
+import ir.syrent.enhancedvelocity.vruom.VRuom
 import java.util.concurrent.CompletableFuture
 
 class PingCommand : SimpleCommand {

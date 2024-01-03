@@ -10,8 +10,8 @@ import ir.syrent.enhancedvelocity.storage.Message
 import ir.syrent.enhancedvelocity.storage.Settings
 import ir.syrent.enhancedvelocity.utils.TextReplacement
 import ir.syrent.enhancedvelocity.utils.sendMessage
-import me.mohamad82.ruom.VRuom
-import me.mohamad82.ruom.string.ProgressBar
+import ir.syrent.enhancedvelocity.vruom.VRuom
+import ir.syrent.enhancedvelocity.vruom.string.ProgressBar
 
 class GListCommand : SimpleCommand {
 

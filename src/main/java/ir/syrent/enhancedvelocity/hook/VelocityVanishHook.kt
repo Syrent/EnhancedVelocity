@@ -3,8 +3,8 @@ package ir.syrent.enhancedvelocity.hook
 import com.velocitypowered.api.proxy.Player
 import com.velocitypowered.api.proxy.server.RegisteredServer
 import ir.syrent.enhancedvelocity.EnhancedVelocity
+import ir.syrent.enhancedvelocity.vruom.VRuom
 import ir.syrent.velocityvanish.velocity.VelocityVanish
-import me.mohamad82.ruom.VRuom
 
 object VelocityVanishHook {
 

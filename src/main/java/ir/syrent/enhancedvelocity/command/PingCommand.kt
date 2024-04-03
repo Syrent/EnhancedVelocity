@@ -4,7 +4,6 @@ import com.velocitypowered.api.command.SimpleCommand
 import com.velocitypowered.api.proxy.Player
 import ir.syrent.enhancedvelocity.hook.VelocityVanishHook
 import ir.syrent.enhancedvelocity.hook.VelocityVanishHook.getNonVanishedPlayers
-import ir.syrent.enhancedvelocity.hook.VelocityVanishHook.getVanishedPlayerNames
 import ir.syrent.enhancedvelocity.storage.Message
 import ir.syrent.enhancedvelocity.utils.TextReplacement
 import ir.syrent.enhancedvelocity.utils.sendMessage

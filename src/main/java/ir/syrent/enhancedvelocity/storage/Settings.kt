@@ -1,6 +1,5 @@
 package ir.syrent.enhancedvelocity.storage
 
-import ir.syrent.enhancedvelocity.EnhancedVelocity
 import ir.syrent.enhancedvelocity.core.ServerData
 import ir.syrent.enhancedvelocity.utils.TextReplacement
 import ir.syrent.enhancedvelocity.vruom.VRuom

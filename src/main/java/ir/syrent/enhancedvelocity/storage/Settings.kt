@@ -17,7 +17,7 @@ object Settings {
     lateinit var defaultLanguage: String
     lateinit var globalListCommand: String
     lateinit var globalListAliases: List<String>
-    var globalListMaxServers: Int = 12
+    var globalListMaxServers: Int = 9
     var progressCount = 45
     lateinit var progressComplete: String
     lateinit var progressNotComplete: String

@@ -7,7 +7,7 @@ import java.util.UUID
 
 interface VanishHook {
 
-    fun isVanished(uniqueId: UUID): Boolean
+    fun setIsVanished(uniqueId: UUID): Boolean
 
     fun setVanished(uniqueId: UUID)
 
@@ -19,7 +19,7 @@ interface VanishHook {
 
         @JvmStatic
         fun isVanished(uniqueId: UUID): Boolean {
-            return HANDLERS.any { it.isVanished(uniqueId) }
+            return HANDLERS.any { it.setIsVanished(uniqueId) }
         }
 
         @JvmStatic
@@ -27,14 +27,17 @@ interface VanishHook {
             return server.playersConnected.any { player -> isVanished(player.uniqueId) }
         }
 
+        @JvmStatic
         fun getVanishedPlayers(): Collection<Player> {
             return VRuom.getServer().allPlayers.filter { isVanished(it.uniqueId) }
         }
 
+        @JvmStatic
         fun getNonVanishedPlayers(): List<Player> {
             return VRuom.getServer().allPlayers.filter { !isVanished(it.uniqueId) }
         }
 
+        @JvmStatic
         fun getNonVanishedPlayers(server: RegisteredServer): Collection<Player> {
             return server.playersConnected.filter { !isVanished(it.uniqueId) }
         }

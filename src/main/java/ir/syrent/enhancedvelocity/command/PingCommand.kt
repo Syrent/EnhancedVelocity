@@ -2,8 +2,7 @@ package ir.syrent.enhancedvelocity.command
 
 import com.velocitypowered.api.command.SimpleCommand
 import com.velocitypowered.api.proxy.Player
-import ir.syrent.enhancedvelocity.hook.VelocityVanishHook
-import ir.syrent.enhancedvelocity.hook.VelocityVanishHook.getNonVanishedPlayers
+import ir.syrent.enhancedvelocity.api.VanishHook
 import ir.syrent.enhancedvelocity.storage.Message
 import ir.syrent.enhancedvelocity.utils.TextReplacement
 import ir.syrent.enhancedvelocity.utils.sendMessage
@@ -28,7 +27,7 @@ class PingCommand : SimpleCommand {
         if (args.isNotEmpty()) {
             val target = VRuom.getServer().allPlayers.find { it.username.lowercase() == args[0].lowercase() }
 
-            if (target == null || VelocityVanishHook.isVanished(target)) {
+            if (target == null || VanishHook.isVanished(target.uniqueId)) {
                 sender.sendMessage(Message.PING_NO_TARGET)
                 return
             }
@@ -48,7 +47,7 @@ class PingCommand : SimpleCommand {
 
 
     override fun suggest(invocation: SimpleCommand.Invocation): List<String> {
-        val list = getNonVanishedPlayers().map { it.username }
+        val list = VanishHook.getNonVanishedPlayers().map { it.username }
 
         return if (list.isNotEmpty()) list.filter { it.lowercase().startsWith(invocation.arguments().last().lowercase()) }.sorted() else list
     }
@@ -58,7 +57,7 @@ class PingCommand : SimpleCommand {
         val list = mutableListOf<String>()
         val args = invocation.arguments()
 
-        list.addAll(getNonVanishedPlayers().map { it.username })
+        list.addAll(VanishHook.getNonVanishedPlayers().map { it.username })
         future.complete(if (args.isNotEmpty()) list.filter { it.lowercase().startsWith(args.last().lowercase()) }.sorted() else list)
         return future
     }

@@ -1,7 +1,7 @@
 package ir.syrent.enhancedvelocity.command
 
 import com.velocitypowered.api.command.SimpleCommand
-import ir.syrent.enhancedvelocity.hook.VelocityVanishHook
+import ir.syrent.enhancedvelocity.api.VanishHook
 import ir.syrent.enhancedvelocity.storage.Message
 import ir.syrent.enhancedvelocity.storage.Settings
 import ir.syrent.enhancedvelocity.utils.TextReplacement
@@ -36,7 +36,7 @@ class FindCommand : SimpleCommand {
             return
         }
 
-        val vanished = VelocityVanishHook.isVanished(targetPlayer)
+        val vanished = VanishHook.isVanished(targetPlayer.uniqueId)
         val server = targetPlayer.currentServer
 
         if (!server.isPresent && !vanished) {
@@ -58,7 +58,7 @@ class FindCommand : SimpleCommand {
     }
 
     override fun suggest(invocation: SimpleCommand.Invocation): List<String> {
-        val list = VelocityVanishHook.getNonVanishedPlayers().map { it.username }
+        val list = VanishHook.getNonVanishedPlayers().map { it.username }
 
         return if (list.isNotEmpty()) list.filter { it.lowercase().startsWith(invocation.arguments().last().lowercase()) }.sorted() else list
     }
@@ -68,7 +68,7 @@ class FindCommand : SimpleCommand {
         val list = mutableListOf<String>()
         val args = invocation.arguments()
 
-        list.addAll(VelocityVanishHook.getNonVanishedPlayers().map { it.username })
+        list.addAll(VanishHook.getNonVanishedPlayers().map { it.username })
         future.complete(if (args.isNotEmpty()) list.filter { it.lowercase().startsWith(args.last().lowercase()) }.sorted() else list)
         return future
     }

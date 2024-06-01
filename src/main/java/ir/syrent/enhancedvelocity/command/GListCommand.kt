@@ -3,9 +3,7 @@ package ir.syrent.enhancedvelocity.command
 import com.velocitypowered.api.command.SimpleCommand
 import com.velocitypowered.api.proxy.Player
 import com.velocitypowered.api.proxy.server.RegisteredServer
-import ir.syrent.enhancedvelocity.hook.VelocityVanishHook
-import ir.syrent.enhancedvelocity.hook.VelocityVanishHook.getNonVanishedPlayers
-import ir.syrent.enhancedvelocity.hook.VelocityVanishHook.isVanished
+import ir.syrent.enhancedvelocity.api.VanishHook
 import ir.syrent.enhancedvelocity.storage.Message
 import ir.syrent.enhancedvelocity.storage.Settings
 import ir.syrent.enhancedvelocity.utils.TextReplacement
@@ -29,7 +27,7 @@ class GListCommand : SimpleCommand {
 
         val canSeeVanishedPlayers = sender.hasPermission(Permissions.Actions.SEE_VANISHED)
 
-        sender.sendMessage(Message.GLOBALLIST_HEADER, TextReplacement("count", getNonVanishedPlayers().size.toString()))
+        sender.sendMessage(Message.GLOBALLIST_HEADER, TextReplacement("count", VanishHook.getNonVanishedPlayers().size.toString()))
 
         var counter = 1
         val orderedServers = mutableMapOf<RegisteredServer, Collection<Player>>()
@@ -40,7 +38,7 @@ class GListCommand : SimpleCommand {
             if (canSeeVanishedPlayers) {
                 allPlayers.addAll(server.playersConnected)
             } else {
-                allPlayers.addAll(getNonVanishedPlayers(server))
+                allPlayers.addAll(VanishHook.getNonVanishedPlayers(server))
             }
 
             if (Settings.servers.containsKey(serverName)) {
@@ -57,7 +55,7 @@ class GListCommand : SimpleCommand {
                                     if (canSeeVanishedPlayers) {
                                         list.addAll(selectedServer.playersConnected)
                                     } else {
-                                        list.addAll(getNonVanishedPlayers(selectedServer))
+                                        list.addAll(VanishHook.getNonVanishedPlayers(selectedServer))
                                     }
                                 }
                                 list
@@ -70,8 +68,8 @@ class GListCommand : SimpleCommand {
             orderedServers[server] = allPlayers
         }
 
-        for (orderedServer in orderedServers.toList().sortedBy { (_, value) -> value.size }.reversed().toMap()) {
-            if (counter == 9) {
+        for (orderedServer in orderedServers.toList().sortedBy { (key, value) -> if (key.serverInfo.name.lowercase().contains("amobig")) value.size + 1 else value.size }.reversed().toMap()) {
+            if (counter == Settings.globalListMaxServers) {
                 break
             }
             counter++
@@ -80,7 +78,7 @@ class GListCommand : SimpleCommand {
             val serverName = Settings.servers[server.serverInfo.name]?.displayname ?: server.serverInfo.name
             val allServerPlayers = orderedServer.value
 
-            val progress = ProgressBar.progressBar(allServerPlayers.size, let { if (canSeeVanishedPlayers) VRuom.getServer().playerCount else VRuom.getServer().allPlayers.filter { !isVanished(it) }.size }, Settings.progressCount, Settings.progressComplete, Settings.progressNotComplete)
+            val progress = ProgressBar.progressBar(allServerPlayers.size, let { if (canSeeVanishedPlayers) VRuom.getServer().playerCount else VRuom.getServer().allPlayers.filter { !VanishHook.isVanished(it.uniqueId) }.size }, Settings.progressCount, Settings.progressComplete, Settings.progressNotComplete)
 
             val playersContext = if (allServerPlayers.isEmpty()) {
                 Settings.formatMessage(Message.NO_ONE_PLAYING)
@@ -94,7 +92,7 @@ class GListCommand : SimpleCommand {
                 TextReplacement("progress", progress),
                 TextReplacement("count", allServerPlayers.size.toString()),
                 TextReplacement("server",
-                    if (VelocityVanishHook.hasVanishedPlayer(server) && canSeeVanishedPlayers)
+                    if (VanishHook.hasVanishedPlayer(server) && canSeeVanishedPlayers)
                         Settings.formatMessage(Settings.serverVanishDecoration.replace("\$server", serverName))
                     else serverName
                 )
@@ -105,7 +103,7 @@ class GListCommand : SimpleCommand {
     private fun formatPlayerList(players: Collection<Player>): String {
         return "\n" + players.distinctBy { player -> player.username }.joinToString(", ") {
             player ->
-                if (isVanished(player))
+                if (VanishHook.isVanished(player.uniqueId))
                     Settings.formatMessage(Settings.playerVanishDecoration.replace("\$player", player.username))
                 else player.username
         }

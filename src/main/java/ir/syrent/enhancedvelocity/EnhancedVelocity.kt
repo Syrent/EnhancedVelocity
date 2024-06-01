@@ -8,7 +8,6 @@ import com.velocitypowered.api.proxy.ProxyServer
 import ir.syrent.enhancedvelocity.command.*
 import ir.syrent.enhancedvelocity.storage.Settings
 import ir.syrent.enhancedvelocity.vruom.VRUoMPlugin
-import ir.syrent.enhancedvelocity.vruom.VRuom
 import org.bstats.velocity.Metrics
 import org.slf4j.Logger
 import java.nio.file.Path
@@ -21,8 +20,6 @@ class EnhancedVelocity @Inject constructor(
 ) : VRUoMPlugin(server, logger, dataDirectory) {
 
     private val metricsFactory: Metrics.Factory
-    var velocityVanishHook = false
-        private set
 
     init {
         this.metricsFactory = metricsFactory
@@ -33,25 +30,12 @@ class EnhancedVelocity @Inject constructor(
         instance = this
 
         enableMetrics()
-        registerDependencies()
         initializeInstances()
         registerCommands()
     }
 
     private fun initializeInstances() {
         Settings
-    }
-
-    private fun registerDependencies() {
-
-        VRuom.log("Checking for VelocityVanish...")
-        try {
-            Class.forName("ir.syrent.velocityvanish.velocity.VelocityVanish")
-            VRuom.log("VelocityVanish found. enabling hook...")
-            velocityVanishHook = true
-        } catch (_: ClassNotFoundException) {
-            VRuom.log("VelocityVanish not found. disabling hook...")
-        }
     }
 
     private fun enableMetrics() {
@@ -66,6 +50,7 @@ class EnhancedVelocity @Inject constructor(
         AlertCommand()
         PingCommand()
         KickAllCommand()
+        LobbyCommand()
     }
 
     companion object {

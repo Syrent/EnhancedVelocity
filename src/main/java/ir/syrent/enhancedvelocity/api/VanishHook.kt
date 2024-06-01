@@ -13,9 +13,17 @@ interface VanishHook {
 
     fun setUnVanished(uniqueId: UUID)
 
+    fun register() {
+        HANDLERS.add(this)
+    }
+
+    fun unregister() {
+        HANDLERS.remove(this)
+    }
+
     companion object {
         @JvmStatic
-        val HANDLERS = listOf<VanishHook>()
+        val HANDLERS = mutableListOf<VanishHook>()
 
         @JvmStatic
         fun isVanished(uniqueId: UUID): Boolean {

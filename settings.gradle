@@ -1,1 +1,7 @@
-rootProject.name = 'EnhancedVelocity'
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = "EnhancedVelocity"

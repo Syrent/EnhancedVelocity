@@ -70,6 +70,10 @@ tasks {
 
         archiveFileName = (findProperty("plugin-name") as String) + " v" + findProperty("version") + ".jar"
         archiveClassifier.set(null as String?)
+
+        for ((from, to) in relocations) {
+            relocate(from, to)
+        }
     }
 
     jar {

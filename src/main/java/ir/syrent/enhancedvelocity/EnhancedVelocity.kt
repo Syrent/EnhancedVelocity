@@ -50,7 +50,6 @@ class EnhancedVelocity @Inject constructor(
         AlertCommand()
         PingCommand()
         KickAllCommand()
-        LobbyCommand()
     }
 
     companion object {

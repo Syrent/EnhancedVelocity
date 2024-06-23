@@ -1,7 +1,7 @@
 general:
-  raw_prefix: "[VelocityReport]"
-  prefix: "<gradient:dark_red:red>VelocityReport</gradient> <gold>|</gold>"
-  console_prefix: "<gray>[<gradient:dark_red:red>VelocityReport</gradient>]</gray>"
+  raw_prefix: "[EnhancedVelocity]"
+  prefix: "<gradient:dark_red:red>EnhancedVelocity</gradient> <gold>|</gold>"
+  console_prefix: "<gray>[<gradient:dark_red:red>EnhancedVelocity</gradient>]</gray>"
   successful_prefix: "<dark_gray>[</dark_gray><dark_green><bold>✔</bold><dark_gray>]</dark_gray>"
   warn_prefix: "<dark_gray>[</dark_gray><gold><bold>!</bold><dark_gray>]</dark_gray>"
   error_prefix: "<dark_gray>[</dark_gray><dark_red><bold>✘</bold><dark_gray>]</dark_gray>"
@@ -38,6 +38,6 @@ features:
       use_target: "$successful_prefix <gradient:dark_green:green><gold>$player</gold> ping is <green>$ping</green>"
   kickall:
     command:
-      use: "$successful_prefix <gradient:dark_green:green>Kicked all users from <yellow>$server</yellow>!"
-      usage: "$warn_prefix <gradient:dark_red:red>Usage: <gold>/kickall <yellow><server>"
+      use_server: "$successful_prefix <gradient:dark_green:green>Kicked all players from <yellow>$server</yellow>!"
+      use_global: "$successful_prefix <gradient:dark_green:green>Kicked all players!"
       no_server: "$error_prefix <gradient:dark_red:red>Server not found!"

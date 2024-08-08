@@ -2,6 +2,9 @@
 EnhancedVelocity is one of the best velocity plugins that you can use to improve your server experience for your players.
 More information can be found at [Why EnhancedVelocity](https://github.com/Syrent/EnhancedVelocity/wiki/Why-EnhancedVelocity%3F)? [wiki page](https://github.com/Syrent/EnhancedVelocity/wiki).
 
+# What is it?
+With this plugin, you gain access to commands like `/glist`, which allows you to view a list of players across all servers; `/find`, which helps you locate a specific player; `/ping`, for checking server latency; and `/send`, which enables you to transfer players between servers seamlessly. These are just a few examples of the versatile commands that can be tailored to meet your specific needs, making EnhancedVelocity an essential tool for server administrators who want to enhance the functionality and user experience of their Velocity server.
+
 # Compiling
 Compilation requires JDK 8 and up.   
 To compile the plugin, run `./gradlew build` from the terminal.   

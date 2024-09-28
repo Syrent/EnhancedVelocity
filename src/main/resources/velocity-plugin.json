@@ -1,1 +1,12 @@
-{"id":"enhancedvelocity","name":"EnhancedVelocity","version":"1.3.1","description":"Customized Velocity experience","url":"syrent.ir","authors":["Syrent"],"dependencies":[],"main":"ir.syrent.enhancedvelocity.EnhancedVelocity"}
+{
+  "id": "${slug}",
+  "name": "${name}",
+  "version": "${version}",
+  "description": "${description}",
+  "url": "sayandev.org",
+  "authors": [
+    "Syrent"
+  ],
+  "dependencies": [],
+  "main": "org.sayandev.enhancedvelocity.EnhancedVelocity"
+}

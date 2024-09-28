@@ -1,17 +1,15 @@
-package ir.syrent.enhancedvelocity.api
+package org.sayandev.enhancedvelocity.api
 
 import com.velocitypowered.api.proxy.Player
 import com.velocitypowered.api.proxy.server.RegisteredServer
-import ir.syrent.enhancedvelocity.vruom.VRuom
+import org.sayandev.enhancedvelocity.feature.Features
+import org.sayandev.enhancedvelocity.feature.features.hook.FeatureVanishHook
+import org.sayandev.stickynote.velocity.server
 import java.util.UUID
 
 interface VanishHook {
 
-    fun setIsVanished(uniqueId: UUID): Boolean
-
-    fun setVanished(uniqueId: UUID)
-
-    fun setUnVanished(uniqueId: UUID)
+    fun isVanished(uniqueId: UUID): Boolean
 
     fun register() {
         HANDLERS.add(this)
@@ -27,7 +25,7 @@ interface VanishHook {
 
         @JvmStatic
         fun isVanished(uniqueId: UUID): Boolean {
-            return HANDLERS.any { it.setIsVanished(uniqueId) }
+            return HANDLERS.any { it.isVanished(uniqueId) } && Features.getFeature<FeatureVanishHook>().isActive()
         }
 
         @JvmStatic
@@ -37,12 +35,12 @@ interface VanishHook {
 
         @JvmStatic
         fun getVanishedPlayers(): Collection<Player> {
-            return VRuom.getServer().allPlayers.filter { isVanished(it.uniqueId) }
+            return server.allPlayers.filter { player -> isVanished(player.uniqueId) }
         }
 
         @JvmStatic
         fun getNonVanishedPlayers(): List<Player> {
-            return VRuom.getServer().allPlayers.filter { !isVanished(it.uniqueId) }
+            return server.allPlayers.filter { player -> !isVanished(player.uniqueId) }
         }
 
         @JvmStatic

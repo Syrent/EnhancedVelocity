@@ -1,0 +1,93 @@
+package org.sayandev.enhancedvelocity.feature
+
+import org.sayandev.stickynote.lib.reflections.Reflections
+import org.sayandev.stickynote.velocity.log
+import org.sayandev.stickynote.velocity.plugin
+import org.sayandev.stickynote.velocity.warn
+import org.sayandev.stickynote.velocity.error
+import java.io.IOException
+import java.net.URL
+import java.security.CodeSource
+import java.util.*
+import java.util.jar.JarEntry
+import java.util.jar.JarFile
+import kotlin.collections.ArrayList
+
+
+object RegisteredFeatureHandler {
+
+    fun process() {
+        val reflections = Reflections("org.sayandev.sayanvanish")
+        val annotatedClasses = if (reflections.getTypesAnnotatedWith(RegisteredFeature::class.java).isEmpty()) {
+            warn("Couldn't load plugin features in your current server software, trying alternative method...")
+            getClassesInPackage(plugin, "org.sayandev.sayanvanish")
+        } else {
+            reflections.getTypesAnnotatedWith(RegisteredFeature::class.java)
+        }
+
+        log("Found ${annotatedClasses.size} features.")
+        for (annotatedClass in annotatedClasses) {
+            createNewInstance(annotatedClass)
+        }
+        log("Enabled ${Features.features.filter { it.isActive() }.size} features.")
+    }
+
+    private fun createNewInstance(clazz: Class<*>) {
+        try {
+            if (Features.features.map { it.javaClass }.contains(clazz)) return
+            val instance = Feature.createFromConfig(clazz as Class<out Feature>)
+            instance.load()
+            when (instance) {
+                is Feature -> {
+                    Features.addFeature(instance)
+                }
+                else -> {
+                    throw NullPointerException("Tried to add item to Items but the type ${clazz.name} is not supported")
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun getClassesInPackage(plugin: Any, packageName: String): Collection<Class<*>> {
+        val classes: MutableCollection<Class<*>> = ArrayList()
+        val codeSource: CodeSource = plugin.javaClass.protectionDomain.codeSource
+        val resource: URL = codeSource.location
+        val relPath = packageName.replace('.', '/')
+        val resPath = resource.path.replace("%20", " ")
+        val jarPath = resPath.replaceFirst("[.]jar[!].*".toRegex(), ".jar").replaceFirst("file:", "")
+
+        val jarFile: JarFile = try {
+            JarFile(jarPath)
+        } catch (e: IOException) {
+            error("Tried to find plugin jar file to load features, but couldn't find it. Your server software doesn't support this behavior.")
+            return emptyList()
+        }
+
+        val entries: Enumeration<JarEntry> = jarFile.entries()
+
+        while (entries.hasMoreElements()) {
+            val entry: JarEntry = entries.nextElement()
+            val entryName: String = entry.name
+            if (entryName.endsWith(".class") && entryName.startsWith(relPath) && entryName.length > relPath.length + 1) {
+                val className = entryName.replace('/', '.').replace('\\', '.').replace(".class", "")
+                try {
+                    val clazz = plugin.javaClass.classLoader.loadClass(className)
+                    if (clazz.isAnnotationPresent(RegisteredFeature::class.java)) {
+                        classes.add(clazz)
+                    }
+                } catch (_: NoClassDefFoundError) {
+                } catch (_: ClassNotFoundException) { }
+            }
+        }
+
+        try {
+            jarFile.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return classes
+    }
+}

@@ -1,0 +1,43 @@
+general:
+  raw_prefix: "[VelocityReport]"
+  prefix: "<gradient:dark_red:red>VelocityReport</gradient> <gold>|</gold>"
+  console_prefix: "<gray>[<gradient:dark_red:red>VelocityReport</gradient>]</gray>"
+  successful_prefix: "<dark_gray>[</dark_gray><dark_green><bold>✔</bold><dark_gray>]</dark_gray>"
+  warn_prefix: "<dark_gray>[</dark_gray><gold><bold>!</bold><dark_gray>]</dark_gray>"
+  error_prefix: "<dark_gray>[</dark_gray><dark_red><bold>✘</bold><dark_gray>]</dark_gray>"
+  only_players: "$error_prefix <gradient:dark_red:red>Bu komutu yalnızca oyuncular kullanabilir."
+  player_not_found: "$error_prefix <gradient:dark_red:red>Oyuncu bulunamadı!"
+  server_not_found: "$error_prefix <gradient:dark_red:red>Sunucu bulunamadı!"
+  valid_parameters: "$error_prefix <gradient:dark_red:red>Lütfen bu komut için geçerli bir parametre kullanın. <dark_gray>($argument)"
+command:
+  no_permission: "$error_prefix <gradient:dark_red:red>Bu komutu kullanma izniniz yok! <dark_gray>($permission)"
+features:
+  global_list:
+    header: "<bold><gradient:gold:yellow><st>                </st></gradient></bold> <gradient:blue:aqua>Ağ Genel Listesi</gradient> <dark_gray>(<gray>$count</gray>)</dark_gray> <bold><gradient:yellow:gold><st>                </st></gradient></bold>"
+    no_one_playing: " Bu sunucuda kimse oynamıyor!"
+    server: "<reset><hover:show_text:'<aqua>▣ Oyuncular:<gray>$players</gray>'><gray>[<gradient:green:yellow:gold:red:dark_red>$progress</gradient><gray>] <dark_gray>(<gray>$count</gray>)</dark_gray> <white>« <aqua>$server"
+  find:
+    command:
+      usage: "$warn_prefix <gradient:dark_red:red>Kullanım: <gold>/find <yellow><kullanıcı>"
+      use: "$successful_prefix <gold>$player</gold>, <gold>$server</gold> <gradient:dark_green:green>sunucusunda oynuyor.$vanished"
+      vanished: " <dark_gray>(Görünmez)</dark_gray>"
+      no_target: "$error_prefix <gradient:dark_red:red>Oyuncu bulunamadı!"
+      no_server: "$warn_prefix <aqua>$player</aqua> <gradient:red:gold>sunucusuna ulaşılamıyor. Lütfen daha sonra tekrar deneyin."
+  send:
+    command:
+      usage: "$warn_prefix <gradient:dark_red:red>Kullanım: <gold>/send <yellow><kullanıcı> <green><sunucu>"
+      use: "$successful_prefix <gold>$player</gold>, <gold>$server</gold> <gradient:dark_green:green>sunucusuna gönderildi."
+  alert:
+    command:
+      usage: "$warn_prefix <gradient:dark_red:red>Kullanım: <gold>/alert <yellow><mesaj>"
+      use: "$successful_prefix <gradient:dark_green:green>$message"
+  ping:
+    command:
+      use: "$successful_prefix <gradient:dark_green:green>Pinginiz: <green>$ping</green>"
+      no_target: "$error_prefix <gradient:dark_red:red>Oyuncu bulunamadı!"
+      use_target: "$successful_prefix <gold>$player</gold> <gradient:dark_green:green>ping değeri: <green>$ping</green>"
+  kickall:
+    command:
+      use: "$successful_prefix <yellow>$server</yellow> <gradient:dark_green:green>sunucusundaki tüm kullanıcılar atıldı!"
+      usage: "$warn_prefix <gradient:dark_red:red>Kullanım: <gold>/kickall <yellow><sunucu>"
+      no_server: "$error_prefix <gradient:dark_red:red>Sunucu bulunamadı!"

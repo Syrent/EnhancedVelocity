@@ -1,0 +1,43 @@
+general:
+  raw_prefix: "[VelocityReport]"
+  prefix: "<gradient:dark_red:red>VelocityReport</gradient> <gold>|</gold>"
+  console_prefix: "<gray>[<gradient:dark_red:red>VelocityReport</gradient>]</gray>"
+  successful_prefix: "<dark_gray>[</dark_gray><dark_green><bold>✔</bold><dark_gray>]</dark_gray>"
+  warn_prefix: "<dark_gray>[</dark_gray><gold><bold>!</bold><dark_gray>]</dark_gray>"
+  error_prefix: "<dark_gray>[</dark_gray><dark_red><bold>✘</bold><dark_gray>]</dark_gray>"
+  only_players: "$error_prefix <gradient:dark_red:red>Only players can use this command."
+  player_not_found: "$error_prefix <gradient:dark_red:red>Player not found!"
+  server_not_found: "$error_prefix <gradient:dark_red:red>Server not found!"
+  valid_parameters: "$error_prefix <gradient:dark_red:red>Please use a valid parameter for this command. <dark_gray>($argument)"
+command:
+  no_permission: "$error_prefix <gradient:dark_red:red>You don't have permission to use this command! <dark_gray>($permission)"
+features:
+  global_list:
+    header: "<bold><gradient:gold:yellow><st>                </st></gradient></bold> <gradient:blue:aqua>Network Global List</gradient> <dark_gray>(<gray>$count</gray>)</dark_gray> <bold><gradient:yellow:gold><st>                </st></gradient></bold>"
+    no_one_playing: " No one is playing on this server!"
+    server: "<reset><hover:show_text:'<aqua>▣ Players:<gray>$players</gray>'><gray>[<gradient:green:yellow:gold:red:dark_red>$progress</gradient><gray>] <dark_gray>(<gray>$count</gray>)</dark_gray> <white>« <aqua>$server"
+  find:
+    command:
+      usage: "$warn_prefix <gradient:dark_red:red>Usage: <gold>/find <yellow><user>"
+      use: "$successful_prefix <gradient:dark_green:green><gold>$player</gold> is playing on <gold>$server</gold> server.$vanished"
+      vanished: " <dark_gray>(Vanished)</dark_gray>"
+      no_target: "$error_prefix <gradient:dark_red:red>Player not found!"
+      no_server: "$warn_prefix <gradient:red:gold>Can't get <aqua>$player</aqua> server. Please try again later."
+  send:
+    command:
+      usage: "$warn_prefix <gradient:dark_red:red>Usage: <gold>/send <yellow><user> <green><server>"
+      use: "$successful_prefix <gradient:dark_green:green><gold>$player</gold> has been sent to <gold>$server</gold> server."
+  alert:
+    command:
+      usage: "$warn_prefix <gradient:dark_red:red>Usage: <gold>/alert <yellow><message>"
+      use: "$successful_prefix <gradient:dark_green:green>$message"
+  ping:
+    command:
+      use: "$successful_prefix <gradient:dark_green:green>Your ping is <green>$ping</green>"
+      no_target: "$error_prefix <gradient:dark_red:red>Player not found!"
+      use_target: "$successful_prefix <gradient:dark_green:green><gold>$player</gold> ping is <green>$ping</green>"
+  kickall:
+    command:
+      use: "$successful_prefix <gradient:dark_green:green>Kicked all users from <yellow>$server</yellow>!"
+      usage: "$warn_prefix <gradient:dark_red:red>Usage: <gold>/kickall <yellow><server>"
+      no_server: "$error_prefix <gradient:dark_red:red>Server not found!"
